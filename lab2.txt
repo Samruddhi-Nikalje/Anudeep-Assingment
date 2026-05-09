@@ -1,0 +1,748 @@
+ysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| ecommerce          |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| student_management |
+| sys                |
+| world              |
++--------------------+
+8 rows in set (0.00 sec)
+
+mysql> use ecommerce;
+Database changed
+mysql> select * from customer;
++-------------+---------------+-----------+------------------+-------------+--------------+---------+---------+-------------+---------+
+| customer_id | customer_name | city      | email_id         | address     | phone_number | pincode | bill_no | state       | country |
++-------------+---------------+-----------+------------------+-------------+--------------+---------+---------+-------------+---------+
+| c101        | Bhargavi      | Mumbai    | bhar01@gmail.com | david rd    | 518616168    |  400021 |      11 | Maharashtra | India   |
+| c102        | Rahul         | Pune      | rahul@gmail.com  | mg road     | 987654321    |  411001 |      12 | Maharashtra | India   |
+| c103        | Sneha         | Delhi     | sneha@gmail.com  | cp road     | 912345678    |  110001 |      13 | Delhi       | India   |
+| c104        | Arjun         | Hyderabad | arjun@gmail.com  | hitech city | 998877665    |  500081 |      14 | Telangana   | India   |
+| c105        | Priya         | Chennai   | priya@gmail.com  | anna nagar  | 887766554    |  600040 |      15 | TamilNadu   | India   |
+| c106        | Sid           | Titwala   | sid@1232         | dal         | 561615116    |  161616 |      21 | Maharashtra | India   |
++-------------+---------------+-----------+------------------+-------------+--------------+---------+---------+-------------+---------+
+6 rows in set (0.00 sec)
+
+mysql> DELETE FROM customer WHERE customer_id IN ('c102','c103','c104','c105','c106');
+Query OK, 5 rows affected (0.01 sec)
+
+mysql> SELECT * FROM customer;
++-------------+---------------+--------+------------------+----------+--------------+---------+---------+-------------+---------+
+| customer_id | customer_name | city   | email_id         | address  | phone_number | pincode | bill_no | state       | country |
++-------------+---------------+--------+------------------+----------+--------------+---------+---------+-------------+---------+
+| c101        | Bhargavi      | Mumbai | bhar01@gmail.com | david rd | 518616168    |  400021 |      11 | Maharashtra | India   |
++-------------+---------------+--------+------------------+----------+--------------+---------+---------+-------------+---------+
+1 row in set (0.00 sec)
+
+mysql> INSERT INTO customer VALUES('c102','Sam','Mumbai','sam@gmail.com','link road','9123450001','400001','16','Maharashtra','India');
+Query OK, 1 row affected (0.01 sec)
+
+mysql>
+mysql> INSERT INTO customer VALUES('c103','Kirti','Pune','kirti@gmail.com','fc road','9123450002','411001','17','Maharashtra','India');
+Query OK, 1 row affected (0.00 sec)
+
+mysql>
+mysql> INSERT INTO customer VALUES('c104','Riddhi','Delhi','riddhi@gmail.com','cp','9123450003','110001','18','Delhi','India');
+Query OK, 1 row affected (0.00 sec)
+
+mysql>
+mysql> INSERT INTO customer VALUES('c105','Siddhi','Chennai','siddhi@gmail.com','anna nagar','9123450004','600040','19','TamilNadu','India');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT * FROM customer;
++-------------+---------------+---------+------------------+------------+--------------+---------+---------+-------------+---------+
+| customer_id | customer_name | city    | email_id         | address    | phone_number | pincode | bill_no | state       | country |
++-------------+---------------+---------+------------------+------------+--------------+---------+---------+-------------+---------+
+| c101        | Bhargavi      | Mumbai  | bhar01@gmail.com | david rd   | 518616168    |  400021 |      11 | Maharashtra | India   |
+| c102        | Sam           | Mumbai  | sam@gmail.com    | link road  | 9123450001   |  400001 |      16 | Maharashtra | India   |
+| c103        | Kirti         | Pune    | kirti@gmail.com  | fc road    | 9123450002   |  411001 |      17 | Maharashtra | India   |
+| c104        | Riddhi        | Delhi   | riddhi@gmail.com | cp         | 9123450003   |  110001 |      18 | Delhi       | India   |
+| c105        | Siddhi        | Chennai | siddhi@gmail.com | anna nagar | 9123450004   |  600040 |      19 | TamilNadu   | India   |
++-------------+---------------+---------+------------------+------------+--------------+---------+---------+-------------+---------+
+5 rows in set (0.00 sec)
+
+mysql>  DELETE FROM customer WHERE customer_id IN ('c102','c103','c104','c105','c106');
+Query OK, 4 rows affected (0.01 sec)
+
+mysql> select * from custommer;
+ERROR 1146 (42S02): Table 'ecommerce.custommer' doesn't exist
+mysql> select * from customer
+    ->  DELETE FROM customer WHERE customer_id IN ('c102','c103','c104','c105','c106');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DELETE FROM customer WHERE customer_id IN ('c102','c103','c104','c105','c106')' at line 2
+mysql> SELECT * FROM customer;
++-------------+---------------+--------+------------------+----------+--------------+---------+---------+-------------+---------+
+| customer_id | customer_name | city   | email_id         | address  | phone_number | pincode | bill_no | state       | country |
++-------------+---------------+--------+------------------+----------+--------------+---------+---------+-------------+---------+
+| c101        | Bhargavi      | Mumbai | bhar01@gmail.com | david rd | 518616168    |  400021 |      11 | Maharashtra | India   |
++-------------+---------------+--------+------------------+----------+--------------+---------+---------+-------------+---------+
+1 row in set (0.00 sec)
+
+mysql> update customer set phone_number = '9226582988' where customer_id='c101';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> insert into customer values('c102','sam','mumbai','sam@gmail.com','yoginiwas','7028359428','421502','12','Hyd','india');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from customer where customer_name like 'b______';
+Empty set (0.00 sec)
+
+mysql> select * from customer where customer_name like 's__';
++-------------+---------------+--------+---------------+-----------+--------------+---------+---------+-------+---------+
+| customer_id | customer_name | city   | email_id      | address   | phone_number | pincode | bill_no | state | country |
++-------------+---------------+--------+---------------+-----------+--------------+---------+---------+-------+---------+
+| c102        | sam           | mumbai | sam@gmail.com | yoginiwas | 7028359428   |  421502 |      12 | Hyd   | india   |
++-------------+---------------+--------+---------------+-----------+--------------+---------+---------+-------+---------+
+1 row in set (0.00 sec)
+
+mysql> select * from customer where customer_name like '%r1';
+Empty set (0.00 sec)
+
+mysql> select * from customer;
++-------------+---------------+--------+------------------+-----------+--------------+---------+---------+-------------+---------+
+| customer_id | customer_name | city   | email_id         | address   | phone_number | pincode | bill_no | state       | country |
++-------------+---------------+--------+------------------+-----------+--------------+---------+---------+-------------+---------+
+| c101        | Bhargavi      | Mumbai | bhar01@gmail.com | david rd  | 9226582988   |  400021 |      11 | Maharashtra | India   |
+| c102        | sam           | mumbai | sam@gmail.com    | yoginiwas | 7028359428   |  421502 |      12 | Hyd         | india   |
++-------------+---------------+--------+------------------+-----------+--------------+---------+---------+-------------+---------+
+2 rows in set (0.00 sec)
+
+mysql> select *from customer where address like 'y________';
++-------------+---------------+--------+---------------+-----------+--------------+---------+---------+-------+---------+
+| customer_id | customer_name | city   | email_id      | address   | phone_number | pincode | bill_no | state | country |
++-------------+---------------+--------+---------------+-----------+--------------+---------+---------+-------+---------+
+| c102        | sam           | mumbai | sam@gmail.com | yoginiwas | 7028359428   |  421502 |      12 | Hyd   | india   |
++-------------+---------------+--------+---------------+-----------+--------------+---------+---------+-------+---------+
+1 row in set (0.00 sec)
+
+mysql> insert into customer values('c103','kirti','chennai','kirti@gmail.com','pramukhsadan','8008874262','421503','3','tamilnadu','india');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into customer values('c104','riddhi','mumbai','riddhi@gmail.com','niwas','8006645262','421309','4','maharashtra','india');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from customer;
++-------------+---------------+---------+------------------+--------------+--------------+---------+---------+-------------+---------+
+| customer_id | customer_name | city    | email_id         | address      | phone_number | pincode | bill_no | state       | country |
++-------------+---------------+---------+------------------+--------------+--------------+---------+---------+-------------+---------+
+| c101        | Bhargavi      | Mumbai  | bhar01@gmail.com | david rd     | 9226582988   |  400021 |      11 | Maharashtra | India   |
+| c102        | sam           | mumbai  | sam@gmail.com    | yoginiwas    | 7028359428   |  421502 |      12 | Hyd         | india   |
+| c103        | kirti         | chennai | kirti@gmail.com  | pramukhsadan | 8008874262   |  421503 |       3 | tamilnadu   | india   |
+| c104        | riddhi        | mumbai  | riddhi@gmail.com | niwas        | 8006645262   |  421309 |       4 | maharashtra | india   |
++-------------+---------------+---------+------------------+--------------+--------------+---------+---------+-------------+---------+
+4 rows in set (0.00 sec)
+
+mysql>  select distinct city from customer;
++---------+
+| city    |
++---------+
+| Mumbai  |
+| chennai |
++---------+
+2 rows in set (0.01 sec)
+
+mysql> desc product;
++----------------+-------------+------+-----+---------+-------+
+| Field          | Type        | Null | Key | Default | Extra |
++----------------+-------------+------+-----+---------+-------+
+| product_id     | varchar(20) | NO   | PRI | NULL    |       |
+| product_name   | varchar(20) | NO   |     | NULL    |       |
+| category       | varchar(20) | NO   |     | NULL    |       |
+| sub_category   | varchar(20) | NO   |     | NULL    |       |
+| original_price | double      | NO   |     | NULL    |       |
+| selling_price  | double      | NO   |     | NULL    |       |
+| stock          | int         | NO   |     | NULL    |       |
++----------------+-------------+------+-----+---------+-------+
+7 rows in set (0.02 sec)
+
+mysql> select * from customer where bill_no<4;
++-------------+---------------+--------+----------------------+------------+--------------+---------+---------+-------+---------+
+| customer_id | customer_name | city   | email                | address    | phone_number | pincode | bill_no | state | country |
++-------------+---------------+--------+----------------------+------------+--------------+---------+---------+-------+---------+
+| c1          | daksh         | mumbai | devkule123@gmail.com | waylenagar | 8989765435   |  421301 |       0 |       |         |
+| c3          | rock          | mumbai | rock123@gmail.com    | sumnagar   | 9376674262   |  421301 |       0 |       |         |
++-------------+---------------+--------+----------------------+------------+--------------+---------+---------+-------+---------+
+2 rows in set (0.00 sec)
+
+mysql> select * from customer where bill_no>4;
++-------------+---------------+--------+---------------------+--------------+--------------+---------+---------+-------------+---------+
+| customer_id | customer_name | city   | email               | address      | phone_number | pincode | bill_no | state       | country |
++-------------+---------------+--------+---------------------+--------------+--------------+---------+---------+-------------+---------+
+| c2          | sam           | thane  | sam123@gmail.com    | tilakchowk   | 8008874262   |  467301 |       5 | maharashtra | india   |
+| c4          | shiv          | mumbai | shiv123@gmail.com   | rutughar     | 8006674262   |  421301 |       6 | raigad      | india   |
+| c5          | bhashi        | odisha | bhashi123@gmail.com | olighar      | 8008874262   |  421301 |       9 | assam       | india   |
+| c6          | swar          | mumbai | swar123@gmail.com   | riverdale    | 8006645262   |  421309 |      10 | maharashtra | india   |
+| c7          | meloni        | saket  | meloni123@gmail.com | chandnichowk | 9786674262   |  521301 |       7 | delhi       | india   |
+| c8          | ashi          | surat  | ashi123@gmail.com   | tharwani     | 855679262    |  671309 |      11 | gujrat      | india   |
++-------------+---------------+--------+---------------------+--------------+--------------+---------+---------+-------------+---------+
+6 rows in set (0.00 sec)
+
+mysql> select * from customer where bill_no>=4;
++-------------+---------------+--------+---------------------+--------------+--------------+---------+---------+-------------+---------+
+| customer_id | customer_name | city   | email               | address      | phone_number | pincode | bill_no | state       | country |
++-------------+---------------+--------+---------------------+--------------+--------------+---------+---------+-------------+---------+
+| c2          | sam           | thane  | sam123@gmail.com    | tilakchowk   | 8008874262   |  467301 |       5 | maharashtra | india   |
+| c4          | shiv          | mumbai | shiv123@gmail.com   | rutughar     | 8006674262   |  421301 |       6 | raigad      | india   |
+| c5          | bhashi        | odisha | bhashi123@gmail.com | olighar      | 8008874262   |  421301 |       9 | assam       | india   |
+| c6          | swar          | mumbai | swar123@gmail.com   | riverdale    | 8006645262   |  421309 |      10 | maharashtra | india   |
+| c7          | meloni        | saket  | meloni123@gmail.com | chandnichowk | 9786674262   |  521301 |       7 | delhi       | india   |
+| c8          | ashi          | surat  | ashi123@gmail.com   | tharwani     | 855679262    |  671309 |      11 | gujrat      | india   |
++-------------+---------------+--------+---------------------+--------------+--------------+---------+---------+-------------+---------+
+6 rows in set (0.00 sec)
+
+mysql> select * from customer where bill_no<=4;
++-------------+---------------+--------+----------------------+------------+--------------+---------+---------+-------+---------+
+| customer_id | customer_name | city   | email                | address    | phone_number | pincode | bill_no | state | country |
++-------------+---------------+--------+----------------------+------------+--------------+---------+---------+-------+---------+
+| c1          | daksh         | mumbai | devkule123@gmail.com | waylenagar | 8989765435   |  421301 |       0 |       |         |
+| c3          | rock          | mumbai | rock123@gmail.com    | sumnagar   | 9376674262   |  421301 |       0 |       |         |
++-------------+---------------+--------+----------------------+------------+--------------+---------+---------+-------+---------+
+2 rows in set (0.00 sec)
+
+mysql> select * from customer where customer_name = 'swar' AND bill_no = 4;
+Empty set (0.00 sec)
+
+mysql> select * from customer where customer_name = 'swar' AND bill_no = 10;
++-------------+---------------+--------+-------------------+-----------+--------------+---------+---------+-------------+---------+
+| customer_id | customer_name | city   | email             | address   | phone_number | pincode | bill_no | state       | country |
++-------------+---------------+--------+-------------------+-----------+--------------+---------+---------+-------------+---------+
+| c6          | swar          | mumbai | swar123@gmail.com | riverdale | 8006645262   |  421309 |      10 | maharashtra | india   |
++-------------+---------------+--------+-------------------+-----------+--------------+---------+---------+-------------+---------+
+1 row in set (0.00 sec)
+
+mysql> select * from customer where customer_name = 'swar' OR bill_no = 5;
++-------------+---------------+--------+-------------------+------------+--------------+---------+---------+-------------+---------+
+| customer_id | customer_name | city   | email             | address    | phone_number | pincode | bill_no | state       | country |
++-------------+---------------+--------+-------------------+------------+--------------+---------+---------+-------------+---------+
+| c2          | sam           | thane  | sam123@gmail.com  | tilakchowk | 8008874262   |  467301 |       5 | maharashtra | india   |
+| c6          | swar          | mumbai | swar123@gmail.com | riverdale  | 8006645262   |  421309 |      10 | maharashtra | india   |
++-------------+---------------+--------+-------------------+------------+--------------+---------+---------+-------------+---------+
+2 rows in set (0.00 sec)
+
+mysql> select * from customer where customer_id between 'c3' and 'c6';
++-------------+---------------+--------+---------------------+-----------+--------------+---------+---------+-------------+---------+
+| customer_id | customer_name | city   | email               | address   | phone_number | pincode | bill_no | state       | country |
++-------------+---------------+--------+---------------------+-----------+--------------+---------+---------+-------------+---------+
+| c3          | rock          | mumbai | rock123@gmail.com   | sumnagar  | 9376674262   |  421301 |       0 |             |         |
+| c4          | shiv          | mumbai | shiv123@gmail.com   | rutughar  | 8006674262   |  421301 |       6 | raigad      | india   |
+| c5          | bhashi        | odisha | bhashi123@gmail.com | olighar   | 8008874262   |  421301 |       9 | assam       | india   |
+| c6          | swar          | mumbai | swar123@gmail.com   | riverdale | 8006645262   |  421309 |      10 | maharashtra | india   |
++-------------+---------------+--------+---------------------+-----------+--------------+---------+---------+-------------+---------+
+4 rows in set (0.02 sec)
+
+mysql> select * from customer where customer_id in ('c1','c2','c4');
++-------------+---------------+--------+----------------------+------------+--------------+---------+---------+-------------+---------+
+| customer_id | customer_name | city   | email                | address    | phone_number | pincode | bill_no | state       | country |
++-------------+---------------+--------+----------------------+------------+--------------+---------+---------+-------------+---------+
+| c1          | daksh         | mumbai | devkule123@gmail.com | waylenagar | 8989765435   |  421301 |       0 |             |         |
+| c2          | sam           | thane  | sam123@gmail.com     | tilakchowk | 8008874262   |  467301 |       5 | maharashtra | india   |
+| c4          | shiv          | mumbai | shiv123@gmail.com    | rutughar   | 8006674262   |  421301 |       6 | raigad      | india   |
++-------------+---------------+--------+----------------------+------------+--------------+---------+---------+-------------+---------+
+3 rows in set (0.00 sec)
+
+mysql> select * from customer where customer_id not in ('c1','c2','c4');
++-------------+---------------+--------+---------------------+--------------+--------------+---------+---------+-------------+---------+
+| customer_id | customer_name | city   | email               | address      | phone_number | pincode | bill_no | state       | country |
++-------------+---------------+--------+---------------------+--------------+--------------+---------+---------+-------------+---------+
+| c3          | rock          | mumbai | rock123@gmail.com   | sumnagar     | 9376674262   |  421301 |       0 |             |         |
+| c5          | bhashi        | odisha | bhashi123@gmail.com | olighar      | 8008874262   |  421301 |       9 | assam       | india   |
+| c6          | swar          | mumbai | swar123@gmail.com   | riverdale    | 8006645262   |  421309 |      10 | maharashtra | india   |
+| c7          | meloni        | saket  | meloni123@gmail.com | chandnichowk | 9786674262   |  521301 |       7 | delhi       | india   |
+| c8          | ashi          | surat  | ashi123@gmail.com   | tharwani     | 855679262    |  671309 |      11 | gujrat      | india   |
++-------------+---------------+--------+---------------------+--------------+--------------+---------+---------+-------------+---------+
+5 rows in set (0.00 sec)
+
+
+mysql> select * from customer where email is not null;
++-------------+---------------+--------+----------------------+--------------+--------------+---------+---------+-------------+---------+
+| customer_id | customer_name | city   | email                | address      | phone_number | pincode | bill_no | state       | country |
++-------------+---------------+--------+----------------------+--------------+--------------+---------+---------+-------------+---------+
+| c1          | daksh         | mumbai | devkule123@gmail.com | waylenagar   | 8989765435   |  421301 |       0 |             |         |
+| c2          | sam           | thane  | sam123@gmail.com     | tilakchowk   | 8008874262   |  467301 |       5 | maharashtra | india   |
+| c3          | rock          | mumbai | rock123@gmail.com    | sumnagar     | 9376674262   |  421301 |       0 |             |         |
+| c4          | shiv          | mumbai | shiv123@gmail.com    | rutughar     | 8006674262   |  421301 |       6 | raigad      | india   |
+| c5          | bhashi        | odisha | bhashi123@gmail.com  | olighar      | 8008874262   |  421301 |       9 | assam       | india   |
+| c6          | swar          | mumbai | swar123@gmail.com    | riverdale    | 8006645262   |  421309 |      10 | maharashtra | india   |
+| c7          | meloni        | saket  | meloni123@gmail.com  | chandnichowk | 9786674262   |  521301 |       7 | delhi       | india   |
+| c8          | ashi          | surat  | ashi123@gmail.com    | tharwani     | 855679262    |  671309 |      11 | gujrat      | india   |
++-------------+---------------+--------+----------------------+--------------+--------------+---------+---------+-------------+---------+
+8 rows in set (0.00 sec)
+
+mysql> select * from customer where state is null;
+Empty set (0.00 sec)
+
+mysql> select * from customer where customer_name like '%me';
+Empty set (0.01 sec)
+
+mysql> select * from customer where customer_name like '%hi';
++-------------+---------------+--------+---------------------+----------+--------------+---------+---------+--------+---------+
+| customer_id | customer_name | city   | email               | address  | phone_number | pincode | bill_no | state  | country |
++-------------+---------------+--------+---------------------+----------+--------------+---------+---------+--------+---------+
+| c5          | bhashi        | odisha | bhashi123@gmail.com | olighar  | 8008874262   |  421301 |       9 | assam  | india   |
+| c8          | ashi          | surat  | ashi123@gmail.com   | tharwani | 855679262    |  671309 |      11 | gujrat | india   |
++-------------+---------------+--------+---------------------+----------+--------------+---------+---------+--------+---------+
+2 rows in set (0.00 sec)
+
+mysql> select * from customer where customer_name like '%sh';
++-------------+---------------+--------+----------------------+------------+--------------+---------+---------+-------+---------+
+| customer_id | customer_name | city   | email                | address    | phone_number | pincode | bill_no | state | country |
++-------------+---------------+--------+----------------------+------------+--------------+---------+---------+-------+---------+
+| c1          | daksh         | mumbai | devkule123@gmail.com | waylenagar | 8989765435   |  421301 |       0 |       |         |
++-------------+---------------+--------+----------------------+------------+--------------+---------+---------+-------+---------+
+1 row in set (0.01 sec)
+
+
+mysql> select * from customer where customer_name like '%lon%';
++-------------+---------------+-------+---------------------+--------------+--------------+---------+---------+-------+---------+
+| customer_id | customer_name | city  | email               | address      | phone_number | pincode | bill_no | state | country |
++-------------+---------------+-------+---------------------+--------------+--------------+---------+---------+-------+---------+
+| c7          | meloni        | saket | meloni123@gmail.com | chandnichowk | 9786674262   |  521301 |       7 | delhi | india   |
++-------------+---------------+-------+---------------------+--------------+--------------+---------+---------+-------+---------+
+1 row in set (0.00 sec)
+
+
+mysql> select * from customer where customer_name like 'sa%';
++-------------+---------------+-------+------------------+------------+--------------+---------+---------+-------------+---------+
+| customer_id | customer_name | city  | email            | address    | phone_number | pincode | bill_no | state       | country |
++-------------+---------------+-------+------------------+------------+--------------+---------+---------+-------------+---------+
+| c2          | sam           | thane | sam123@gmail.com | tilakchowk | 8008874262   |  467301 |       5 | maharashtra | india   |
++-------------+---------------+-------+------------------+------------+--------------+---------+---------+-------------+---------+
+1 row in set (0.00 sec)
+
+mysql> select * from customer where address like 'm__________';
+Empty set (0.00 sec)
+
+mysql> select * from customer where state like 'm__________';
++-------------+---------------+--------+-------------------+------------+--------------+---------+---------+-------------+---------+
+| customer_id | customer_name | city   | email             | address    | phone_number | pincode | bill_no | state       | country |
++-------------+---------------+--------+-------------------+------------+--------------+---------+---------+-------------+---------+
+| c2          | sam           | thane  | sam123@gmail.com  | tilakchowk | 8008874262   |  467301 |       5 | maharashtra | india   |
+| c6          | swar          | mumbai | swar123@gmail.com | riverdale  | 8006645262   |  421309 |      10 | maharashtra | india   |
++-------------+---------------+--------+-------------------+------------+--------------+---------+---------+-------------+---------+
+2 rows in set (0.00 sec)
+
+mysql> select * from customer where country like 'i____';
++-------------+---------------+--------+---------------------+--------------+--------------+---------+---------+-------------+---------+
+| customer_id | customer_name | city   | email               | address      | phone_number | pincode | bill_no | state       | country |
++-------------+---------------+--------+---------------------+--------------+--------------+---------+---------+-------------+---------+
+| c2          | sam           | thane  | sam123@gmail.com    | tilakchowk   | 8008874262   |  467301 |       5 | maharashtra | india   |
+| c4          | shiv          | mumbai | shiv123@gmail.com   | rutughar     | 8006674262   |  421301 |       6 | raigad      | india   |
+| c5          | bhashi        | odisha | bhashi123@gmail.com | olighar      | 8008874262   |  421301 |       9 | assam       | india   |
+| c6          | swar          | mumbai | swar123@gmail.com   | riverdale    | 8006645262   |  421309 |      10 | maharashtra | india   |
+| c7          | meloni        | saket  | meloni123@gmail.com | chandnichowk | 9786674262   |  521301 |       7 | delhi       | india   |
+| c8          | ashi          | surat  | ashi123@gmail.com   | tharwani     | 855679262    |  671309 |      11 | gujrat      | india   |
++-------------+---------------+--------+---------------------+--------------+--------------+---------+---------+-------------+---------+
+6 rows in set (0.00 sec)
+mysql> desc product;
+ERROR 1146 (42S02): Table 'ecommerce.product' doesn't exist
+mysql> create table product(
+    -> product_id varchar(20) primary key,
+    -> product_name varchar(20),
+    -> category varchar(20),
+    -> sub_category varchar(20),
+    -> original_price double,
+    -> selling_price double,
+    -> stock int
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc product;
++----------------+-------------+------+-----+---------+-------+
+| Field          | Type        | Null | Key | Default | Extra |
++----------------+-------------+------+-----+---------+-------+
+| product_id     | varchar(20) | NO   | PRI | NULL    |       |
+| product_name   | varchar(20) | YES  |     | NULL    |       |
+| category       | varchar(20) | YES  |     | NULL    |       |
+| sub_category   | varchar(20) | YES  |     | NULL    |       |
+| original_price | double      | YES  |     | NULL    |       |
+| selling_price  | double      | YES  |     | NULL    |       |
+| stock          | int         | YES  |     | NULL    |       |
++----------------+-------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> select * from customer where bill_no > 4;
++-------------+---------------+--------+------------------+-----------+--------------+---------+---------+-------------+---------+
+| customer_id | customer_name | city   | email_id         | address   | phone_number | pincode | bill_no | state       | country |
++-------------+---------------+--------+------------------+-----------+--------------+---------+---------+-------------+---------+
+| c101        | Bhargavi      | Mumbai | bhar01@gmail.com | david rd  | 9226582988   |  400021 |      11 | Maharashtra | India   |
+| c102        | sam           | mumbai | sam@gmail.com    | yoginiwas | 7028359428   |  421502 |      12 | Hyd         | india   |
++-------------+---------------+--------+------------------+-----------+--------------+---------+---------+-------------+---------+
+2 rows in set (0.00 sec)
+
+mysql> select * from customer where bill_no < 4;
++-------------+---------------+---------+-----------------+--------------+--------------+---------+---------+-----------+---------+
+| customer_id | customer_name | city    | email_id        | address      | phone_number | pincode | bill_no | state     | country |
++-------------+---------------+---------+-----------------+--------------+--------------+---------+---------+-----------+---------+
+| c103        | kirti         | chennai | kirti@gmail.com | pramukhsadan | 8008874262   |  421503 |       3 | tamilnadu | india   |
++-------------+---------------+---------+-----------------+--------------+--------------+---------+---------+-----------+---------+
+1 row in set (0.00 sec)
+
+mysql> select * from customer where bill_no >= 4;
++-------------+---------------+--------+------------------+-----------+--------------+---------+---------+-------------+---------+
+| customer_id | customer_name | city   | email_id         | address   | phone_number | pincode | bill_no | state       | country |
++-------------+---------------+--------+------------------+-----------+--------------+---------+---------+-------------+---------+
+| c101        | Bhargavi      | Mumbai | bhar01@gmail.com | david rd  | 9226582988   |  400021 |      11 | Maharashtra | India   |
+| c102        | sam           | mumbai | sam@gmail.com    | yoginiwas | 7028359428   |  421502 |      12 | Hyd         | india   |
+| c104        | riddhi        | mumbai | riddhi@gmail.com | niwas     | 8006645262   |  421309 |       4 | maharashtra | india   |
++-------------+---------------+--------+------------------+-----------+--------------+---------+---------+-------------+---------+
+3 rows in set (0.00 sec)
+
+mysql> select * from customer where bill_no <= 4;
++-------------+---------------+---------+------------------+--------------+--------------+---------+---------+-------------+---------+
+| customer_id | customer_name | city    | email_id         | address      | phone_number | pincode | bill_no | state       | country |
++-------------+---------------+---------+------------------+--------------+--------------+---------+---------+-------------+---------+
+| c103        | kirti         | chennai | kirti@gmail.com  | pramukhsadan | 8008874262   |  421503 |       3 | tamilnadu   | india   |
+| c104        | riddhi        | mumbai  | riddhi@gmail.com | niwas        | 8006645262   |  421309 |       4 | maharashtra | india   |
++-------------+---------------+---------+------------------+--------------+--------------+---------+---------+-------------+---------+
+2 rows in set (0.00 sec)
+
+mysql> select * from customer
+    -> where customer_name='swar' AND bill_no=10;
+Empty set (0.00 sec)
+
+mysql> select * from customer
+    -> where customer_name='swar' OR bill_no=5;
+Empty set (0.00 sec)
+
+mysql> select * from customer
+    -> where customer_name='sam' OR bill_no=5;
++-------------+---------------+--------+---------------+-----------+--------------+---------+---------+-------+---------+
+| customer_id | customer_name | city   | email_id      | address   | phone_number | pincode | bill_no | state | country |
++-------------+---------------+--------+---------------+-----------+--------------+---------+---------+-------+---------+
+| c102        | sam           | mumbai | sam@gmail.com | yoginiwas | 7028359428   |  421502 |      12 | Hyd   | india   |
++-------------+---------------+--------+---------------+-----------+--------------+---------+---------+-------+---------+
+1 row in set (0.00 sec)
+
+mysql> ^C
+mysql> insert into product values('p1','Laptop','Electronics','Gaming',50000,45000,10);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into product values('p2','Mouse','Electronics','Wireless',1000,800,50);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into product values('p3','Shoes','Fashion','Sports',3000,2500,20);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into product values('p4','Book','Stationery','Novel',500,400,100);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from customer;
++-------------+---------------+---------+------------------+--------------+--------------+---------+---------+-------------+---------+
+| customer_id | customer_name | city    | email_id         | address      | phone_number | pincode | bill_no | state       | country |
++-------------+---------------+---------+------------------+--------------+--------------+---------+---------+-------------+---------+
+| c101        | Bhargavi      | Mumbai  | bhar01@gmail.com | david rd     | 9226582988   |  400021 |      11 | Maharashtra | India   |
+| c102        | sam           | mumbai  | sam@gmail.com    | yoginiwas    | 7028359428   |  421502 |      12 | Hyd         | india   |
+| c103        | kirti         | chennai | kirti@gmail.com  | pramukhsadan | 8008874262   |  421503 |       3 | tamilnadu   | india   |
+| c104        | riddhi        | mumbai  | riddhi@gmail.com | niwas        | 8006645262   |  421309 |       4 | maharashtra | india   |
++-------------+---------------+---------+------------------+--------------+--------------+---------+---------+-------------+---------+
+4 rows in set (0.00 sec)
+
+mysql> select * from product;select * from product;
++------------+--------------+-------------+--------------+----------------+---------------+-------+
+| product_id | product_name | category    | sub_category | original_price | selling_price | stock |
++------------+--------------+-------------+--------------+----------------+---------------+-------+
+| p1         | Laptop       | Electronics | Gaming       |          50000 |         45000 |    10 |
+| p2         | Mouse        | Electronics | Wireless     |           1000 |           800 |    50 |
+| p3         | Shoes        | Fashion     | Sports       |           3000 |          2500 |    20 |
+| p4         | Book         | Stationery  | Novel        |            500 |           400 |   100 |
++------------+--------------+-------------+--------------+----------------+---------------+-------+
+4 rows in set (0.00 sec)
+
++------------+--------------+-------------+--------------+----------------+---------------+-------+
+| product_id | product_name | category    | sub_category | original_price | selling_price | stock |
++------------+--------------+-------------+--------------+----------------+---------------+-------+
+| p1         | Laptop       | Electronics | Gaming       |          50000 |         45000 |    10 |
+| p2         | Mouse        | Electronics | Wireless     |           1000 |           800 |    50 |
+| p3         | Shoes        | Fashion     | Sports       |           3000 |          2500 |    20 |
+| p4         | Book         | Stationery  | Novel        |            500 |           400 |   100 |
++------------+--------------+-------------+--------------+----------------+---------------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from product where stock > 20;
++------------+--------------+-------------+--------------+----------------+---------------+-------+
+| product_id | product_name | category    | sub_category | original_price | selling_price | stock |
++------------+--------------+-------------+--------------+----------------+---------------+-------+
+| p2         | Mouse        | Electronics | Wireless     |           1000 |           800 |    50 |
+| p4         | Book         | Stationery  | Novel        |            500 |           400 |   100 |
++------------+--------------+-------------+--------------+----------------+---------------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select * from product where selling_price < 3000;
++------------+--------------+-------------+--------------+----------------+---------------+-------+
+| product_id | product_name | category    | sub_category | original_price | selling_price | stock |
++------------+--------------+-------------+--------------+----------------+---------------+-------+
+| p2         | Mouse        | Electronics | Wireless     |           1000 |           800 |    50 |
+| p3         | Shoes        | Fashion     | Sports       |           3000 |          2500 |    20 |
+| p4         | Book         | Stationery  | Novel        |            500 |           400 |   100 |
++------------+--------------+-------------+--------------+----------------+---------------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select * from product where category = 'Electronics';
++------------+--------------+-------------+--------------+----------------+---------------+-------+
+| product_id | product_name | category    | sub_category | original_price | selling_price | stock |
++------------+--------------+-------------+--------------+----------------+---------------+-------+
+| p1         | Laptop       | Electronics | Gaming       |          50000 |         45000 |    10 |
+| p2         | Mouse        | Electronics | Wireless     |           1000 |           800 |    50 |
++------------+--------------+-------------+--------------+----------------+---------------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select * from product where product_name like '%o%';
++------------+--------------+-------------+--------------+----------------+---------------+-------+
+| product_id | product_name | category    | sub_category | original_price | selling_price | stock |
++------------+--------------+-------------+--------------+----------------+---------------+-------+
+| p1         | Laptop       | Electronics | Gaming       |          50000 |         45000 |    10 |
+| p2         | Mouse        | Electronics | Wireless     |           1000 |           800 |    50 |
+| p3         | Shoes        | Fashion     | Sports       |           3000 |          2500 |    20 |
+| p4         | Book         | Stationery  | Novel        |            500 |           400 |   100 |
++------------+--------------+-------------+--------------+----------------+---------------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from customer order by bill_no;
++-------------+---------------+---------+------------------+--------------+--------------+---------+---------+-------------+---------+
+| customer_id | customer_name | city    | email_id         | address      | phone_number | pincode | bill_no | state       | country |
++-------------+---------------+---------+------------------+--------------+--------------+---------+---------+-------------+---------+
+| c103        | kirti         | chennai | kirti@gmail.com  | pramukhsadan | 8008874262   |  421503 |       3 | tamilnadu   | india   |
+| c104        | riddhi        | mumbai  | riddhi@gmail.com | niwas        | 8006645262   |  421309 |       4 | maharashtra | india   |
+| c101        | Bhargavi      | Mumbai  | bhar01@gmail.com | david rd     | 9226582988   |  400021 |      11 | Maharashtra | India   |
+| c102        | sam           | mumbai  | sam@gmail.com    | yoginiwas    | 7028359428   |  421502 |      12 | Hyd         | india   |
++-------------+---------------+---------+------------------+--------------+--------------+---------+---------+-------------+---------+
+4 rows in set (0.00 sec)
+
+mysql> select * from customer order by bill_no desc;
++-------------+---------------+---------+------------------+--------------+--------------+---------+---------+-------------+---------+
+| customer_id | customer_name | city    | email_id         | address      | phone_number | pincode | bill_no | state       | country |
++-------------+---------------+---------+------------------+--------------+--------------+---------+---------+-------------+---------+
+| c102        | sam           | mumbai  | sam@gmail.com    | yoginiwas    | 7028359428   |  421502 |      12 | Hyd         | india   |
+| c101        | Bhargavi      | Mumbai  | bhar01@gmail.com | david rd     | 9226582988   |  400021 |      11 | Maharashtra | India   |
+| c104        | riddhi        | mumbai  | riddhi@gmail.com | niwas        | 8006645262   |  421309 |       4 | maharashtra | india   |
+| c103        | kirti         | chennai | kirti@gmail.com  | pramukhsadan | 8008874262   |  421503 |       3 | tamilnadu   | india   |
++-------------+---------------+---------+------------------+--------------+--------------+---------+---------+-------------+---------+
+4 rows in set (0.00 sec)
+
+mysql> select * from product order by selling_price asc;
++------------+--------------+-------------+--------------+----------------+---------------+-------+
+| product_id | product_name | category    | sub_category | original_price | selling_price | stock |
++------------+--------------+-------------+--------------+----------------+---------------+-------+
+| p4         | Book         | Stationery  | Novel        |            500 |           400 |   100 |
+| p2         | Mouse        | Electronics | Wireless     |           1000 |           800 |    50 |
+| p3         | Shoes        | Fashion     | Sports       |           3000 |          2500 |    20 |
+| p1         | Laptop       | Electronics | Gaming       |          50000 |         45000 |    10 |
++------------+--------------+-------------+--------------+----------------+---------------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from product order by stock desc;
++------------+--------------+-------------+--------------+----------------+---------------+-------+
+| product_id | product_name | category    | sub_category | original_price | selling_price | stock |
++------------+--------------+-------------+--------------+----------------+---------------+-------+
+| p4         | Book         | Stationery  | Novel        |            500 |           400 |   100 |
+| p2         | Mouse        | Electronics | Wireless     |           1000 |           800 |    50 |
+| p3         | Shoes        | Fashion     | Sports       |           3000 |          2500 |    20 |
+| p1         | Laptop       | Electronics | Gaming       |          50000 |         45000 |    10 |
++------------+--------------+-------------+--------------+----------------+---------------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from customer limit 3;
++-------------+---------------+---------+------------------+--------------+--------------+---------+---------+-------------+---------+
+| customer_id | customer_name | city    | email_id         | address      | phone_number | pincode | bill_no | state       | country |
++-------------+---------------+---------+------------------+--------------+--------------+---------+---------+-------------+---------+
+| c101        | Bhargavi      | Mumbai  | bhar01@gmail.com | david rd     | 9226582988   |  400021 |      11 | Maharashtra | India   |
+| c102        | sam           | mumbai  | sam@gmail.com    | yoginiwas    | 7028359428   |  421502 |      12 | Hyd         | india   |
+| c103        | kirti         | chennai | kirti@gmail.com  | pramukhsadan | 8008874262   |  421503 |       3 | tamilnadu   | india   |
++-------------+---------------+---------+------------------+--------------+--------------+---------+---------+-------------+---------+
+3 rows in set (0.00 sec)
+
+mysql> select * from product limit 2;
++------------+--------------+-------------+--------------+----------------+---------------+-------+
+| product_id | product_name | category    | sub_category | original_price | selling_price | stock |
++------------+--------------+-------------+--------------+----------------+---------------+-------+
+| p1         | Laptop       | Electronics | Gaming       |          50000 |         45000 |    10 |
+| p2         | Mouse        | Electronics | Wireless     |           1000 |           800 |    50 |
++------------+--------------+-------------+--------------+----------------+---------------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select distinct city from customer;
++---------+
+| city    |
++---------+
+| Mumbai  |
+| chennai |
++---------+
+2 rows in set (0.00 sec)
+
+mysql> select count(*) from customer;
++----------+
+| count(*) |
++----------+
+|        4 |
++----------+
+1 row in set (0.01 sec)
+
+mysql> select count(*) from product;
++----------+
+| count(*) |
++----------+
+|        4 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select min(bill_no) from customer;
++--------------+
+| min(bill_no) |
++--------------+
+|            3 |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> select max(bill_no) from customer;
++--------------+
+| max(bill_no) |
++--------------+
+|           12 |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> select avg(selling_price) from product;
++--------------------+
+| avg(selling_price) |
++--------------------+
+|              12175 |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> select sum(stock) from product;
++------------+
+| sum(stock) |
++------------+
+|        180 |
++------------+
+1 row in set (0.00 sec)
+
+mysql>
+mysql> create table orders(
+    -> order_id varchar(20),
+    -> customer_id varchar(20),
+    -> product_id varchar(20),
+    -> quantity int
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> insert into orders values('o1','c101','p1',2);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into orders values('o2','c102','p2',1);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into orders values('o3','c103','p3',4);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into orders values('o4','c104','p5',1);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from orders;
++----------+-------------+------------+----------+
+| order_id | customer_id | product_id | quantity |
++----------+-------------+------------+----------+
+| o1       | c101        | p1         |        2 |
+| o2       | c102        | p2         |        1 |
+| o3       | c103        | p3         |        4 |
+| o4       | c104        | p5         |        1 |
++----------+-------------+------------+----------+
+4 rows in set (0.00 sec)
+
+mysql> select customer.customer_name,
+    -> orders.order_id
+    -> from customer
+    -> inner join orders
+    -> on customer.customer_id = orders.customer_id;
++---------------+----------+
+| customer_name | order_id |
++---------------+----------+
+| Bhargavi      | o1       |
+| sam           | o2       |
+| kirti         | o3       |
+| riddhi        | o4       |
++---------------+----------+
+4 rows in set (0.00 sec)
+
+mysql> select customer.customer_name,
+    -> product.product_name
+    -> from orders
+    -> inner join customer
+    -> on orders.customer_id = customer.customer_id
+    -> inner join product
+    -> on orders.product_id = product.product_id;
++---------------+--------------+
+| customer_name | product_name |
++---------------+--------------+
+| Bhargavi      | Laptop       |
+| sam           | Mouse        |
+| kirti         | Shoes        |
++---------------+--------------+
+3 rows in set (0.00 sec)
+
+mysql> show tables;
++---------------------+
+| Tables_in_ecommerce |
++---------------------+
+| customer            |
+| orders              |
+| product             |
++---------------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from customer;
++-------------+---------------+---------+------------------+--------------+--------------+---------+---------+-------------+---------+
+| customer_id | customer_name | city    | email_id         | address      | phone_number | pincode | bill_no | state       | country |
++-------------+---------------+---------+------------------+--------------+--------------+---------+---------+-------------+---------+
+| c101        | Bhargavi      | Mumbai  | bhar01@gmail.com | david rd     | 9226582988   |  400021 |      11 | Maharashtra | India   |
+| c102        | sam           | mumbai  | sam@gmail.com    | yoginiwas    | 7028359428   |  421502 |      12 | Hyd         | india   |
+| c103        | kirti         | chennai | kirti@gmail.com  | pramukhsadan | 8008874262   |  421503 |       3 | tamilnadu   | india   |
+| c104        | riddhi        | mumbai  | riddhi@gmail.com | niwas        | 8006645262   |  421309 |       4 | maharashtra | india   |
++-------------+---------------+---------+------------------+--------------+--------------+---------+---------+-------------+---------+
+4 rows in set (0.00 sec)
+
+mysql> select * from product;
++------------+--------------+-------------+--------------+----------------+---------------+-------+
+| product_id | product_name | category    | sub_category | original_price | selling_price | stock |
++------------+--------------+-------------+--------------+----------------+---------------+-------+
+| p1         | Laptop       | Electronics | Gaming       |          50000 |         45000 |    10 |
+| p2         | Mouse        | Electronics | Wireless     |           1000 |           800 |    50 |
+| p3         | Shoes        | Fashion     | Sports       |           3000 |          2500 |    20 |
+| p4         | Book         | Stationery  | Novel        |            500 |           400 |   100 |
++------------+--------------+-------------+--------------+----------------+---------------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from orders;
++----------+-------------+------------+----------+
+| order_id | customer_id | product_id | quantity |
++----------+-------------+------------+----------+
+| o1       | c101        | p1         |        2 |
+| o2       | c102        | p2         |        1 |
+| o3       | c103        | p3         |        4 |
+| o4       | c104        | p5         |        1 |
++----------+-------------+------------+----------+
+4 rows in set (0.00 sec)
+
+mysql> select customer.customer_name,
+    -> product.product_name,
+    -> orders.quantity
+    -> from orders
+    -> inner join customer
+    -> on orders.customer_id = customer.customer_id
+    -> inner join product
+    -> on orders.product_id = product.product_id;
++---------------+--------------+----------+
+| customer_name | product_name | quantity |
++---------------+--------------+----------+
+| Bhargavi      | Laptop       |        2 |
+| sam           | Mouse        |        1 |
+| kirti         | Shoes        |        4 |
++---------------+--------------+----------+
+3 rows in set (0.00 sec)
+
+mysql>
